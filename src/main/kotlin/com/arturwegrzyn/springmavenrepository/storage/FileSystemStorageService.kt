@@ -14,6 +14,7 @@ import java.net.URI
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
+import java.nio.file.StandardCopyOption
 import java.util.stream.Collectors
 
 @Service
@@ -32,17 +33,13 @@ class FileSystemStorageService @Autowired constructor(properties: StoragePropert
         }
     }
 
-    override fun store(inputStream: InputStream, originalFileName: String) {
+    override fun store(fullFileName: String, inputStream: InputStream) {
         try {
-//            if (file.isEmpty()) {
-//                throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
-//            }
-            val resolve = rootLocation.resolve(originalFileName).toAbsolutePath()
-            val file = resolve.toFile()
-            file.parentFile.mkdirs()
-            Files.copy(inputStream, resolve)
+            val pathToFile = load(fullFileName).toAbsolutePath()
+            createDirectories(pathToFile.parent)
+            Files.copy(inputStream, pathToFile, StandardCopyOption.REPLACE_EXISTING)
         } catch (e: IOException) {
-            throw StorageException("Failed to store file $originalFileName", e)
+            throw StorageException("Failed to store file $fullFileName", e)
         }
     }
 

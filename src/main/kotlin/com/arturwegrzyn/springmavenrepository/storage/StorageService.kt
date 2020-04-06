@@ -8,7 +8,7 @@ import java.nio.file.Path
 interface StorageService {
     fun init()
     fun store(file: MultipartFile)
-    fun store(inputStream: InputStream, originalFileName: String)
+    fun store(fullFileName: String, inputStream: InputStream)
     fun loadAll(): List<Path>
     fun load(filename: String): Path
     fun loadAsResource(filename: String): Resource
