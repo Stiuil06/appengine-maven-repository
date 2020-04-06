@@ -8,9 +8,9 @@ repositories {
     maven {
         credentials {
             username 'user'
-            password 'passw0rd'
+            password 'password'
         }
-        url "https://yourappid.appspot.com"
+        url "http://127.0.0.1/"
     }
 }
 

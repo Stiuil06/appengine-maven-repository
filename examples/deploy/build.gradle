@@ -11,8 +11,8 @@ targetCompatibility = 1.8
 uploadArchives {
     repositories {
         mavenDeployer {
-            repository(url: "https://yourappid.appspot.com") {
-                authentication(userName: "admin", password: "passw0rd")
+            repository(url: "http://127.0.0.1/") {
+                authentication(userName: "admin", password: "password")
             }
             pom.version = "1.0.0"
             pom.artifactId = "greeter"
