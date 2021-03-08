@@ -1,6 +1,6 @@
 server:
   port:
-    80
+    8080
 maven:
-  proxy: true
+  multiRepo: true
   redirectUrl: https://repo.maven.apache.org/maven2

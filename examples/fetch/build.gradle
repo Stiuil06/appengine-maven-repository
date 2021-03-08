@@ -4,12 +4,13 @@ apply plugin: 'application'
 mainClassName = 'hello.HelloWorld'
 
 repositories {
+//    mavenCentral()
     maven {
         credentials {
-            username 'user'
+            username 'admin'
             password 'password'
         }
-        url "http://127.0.0.1/"
+        url "http://127.0.0.1:8080/"
     }
 }
 

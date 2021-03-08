@@ -23,8 +23,8 @@ class ExceptionController @Autowired constructor(private val env: Environment) {
     fun storageFileNotFoundWithFileNameException(e: StorageFileNotFoundWithFileNameException): Any {
         val mavenTargetRepositoryUrl = env.getProperty("maven.redirectUrl")
         if (Objects.nonNull(mavenTargetRepositoryUrl)) {
-            val isMavenProxyWithPrefix = env.getProperty("maven.proxy")?.toBoolean() ?: false
-            val filePath = if (isMavenProxyWithPrefix)
+            val isMultiRepo = env.getProperty("maven.multiRepo")?.toBoolean() ?: false
+            val filePath = if (isMultiRepo)
                 e.filename.split("/").stream()
                         .skip(1)
                         .collect(Collectors.joining("/"))
