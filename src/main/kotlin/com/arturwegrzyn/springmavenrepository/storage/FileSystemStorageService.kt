@@ -65,10 +65,10 @@ class FileSystemStorageService @Autowired constructor(properties: StoragePropert
             if (resource.exists() || resource.isReadable) {
                 resource
             } else {
-                throw StorageFileNotFoundException("Could not read file: $filename")
+                throw StorageFileNotFoundWithFileNameException(filename, "Could not read file: $filename")
             }
         } catch (e: MalformedURLException) {
-            throw StorageFileNotFoundException("Could not read file: $filename", e)
+            throw StorageFileNotFoundWithFileNameException(filename, "Could not read file: $filename", e)
         }
     }
 
@@ -89,7 +89,7 @@ class FileSystemStorageService @Autowired constructor(properties: StoragePropert
                     try {
                         return@map UrlResource(uri)
                     } catch (e: MalformedURLException) {
-                        throw StorageFileNotFoundException("Could not read file: $filename", e)
+                        throw StorageFileNotFoundWithFileNameException(filename, "Could not read file: $filename", e)
                     }
                 }
                 .filter { resource: UrlResource -> resource.exists() || resource.isReadable }
